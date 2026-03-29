@@ -35,7 +35,7 @@ dependencies {
     api 'org.springframework.cloud:spring-cloud-starter-config'
     api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
     api 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-    api 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+//    api 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     api 'org.springframework.cloud:spring-cloud-starter-openfeign'
     api 'org.springframework.boot:spring-boot-starter-validation'
     api 'org.springframework.boot:spring-boot-starter-aop'
