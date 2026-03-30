@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 
 @AutoConfiguration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-public class AppCtx {
+public class AppContext {
 
     @Bean
     @ConditionalOnMissingBean(FeignClientConfig.class)
