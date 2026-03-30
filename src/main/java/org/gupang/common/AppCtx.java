@@ -1,9 +1,9 @@
-package org.gupang;
+package org.gupang.common;
 
-import org.gupang.config.FeignClientConfig;
-import org.gupang.config.JpaConfig;
-import org.gupang.config.RedisConfig;
-import org.gupang.exception.GlobalExceptionHandler;
+import org.gupang.common.config.FeignClientConfig;
+import org.gupang.common.config.JpaConfig;
+import org.gupang.common.config.RedisConfig;
+import org.gupang.common.exception.GlobalExceptionHandler;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;

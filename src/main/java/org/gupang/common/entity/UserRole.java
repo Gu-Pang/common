@@ -1,4 +1,4 @@
-package org.gupang.entity;
+package org.gupang.common.entity;
 
 public enum UserRole {
     MASTER,

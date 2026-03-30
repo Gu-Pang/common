@@ -1,4 +1,4 @@
-package org.gupang.entity;
+package org.gupang.common.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

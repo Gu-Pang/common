@@ -1,4 +1,4 @@
-package org.gupang.exception;
+package org.gupang.common.exception;
 
 import lombok.Getter;
 

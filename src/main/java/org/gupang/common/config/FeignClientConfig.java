@@ -1,4 +1,4 @@
-package org.gupang.config;
+package org.gupang.common.config;
 
 import org.springframework.context.annotation.Configuration;
 
