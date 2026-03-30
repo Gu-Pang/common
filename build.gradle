@@ -1,11 +1,15 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'org.springframework.boot' version '3.5.13'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'org.gupang'
-version = '0.0.1-SNAPSHOT'
-description = 'common'
+version = '0.0.2-SNAPSHOT'
+
+bootJar { enabled = false }
+jar { enabled = true }
 
 java {
     toolchain {
@@ -13,47 +17,55 @@ java {
     }
 }
 
-jar { enabled = true }
-
 repositories {
     mavenCentral()
     maven { url 'https://repo.spring.io/milestone' }
 }
 
 ext {
-    set('springBootVersion', "3.2.3")
-    set('springCloudVersion', "2023.0.1")
+    set('springCloudVersion', "2025.0.1")
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 dependencies {
-    api platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-    api platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
-
     api 'org.springframework.boot:spring-boot-starter-data-jpa'
-    api 'org.springframework.kafka:spring-kafka'
+    api 'org.springframework.boot:spring-boot-starter-data-redis'
+    api 'org.springframework.boot:spring-boot-starter-validation'
     api 'org.springframework.boot:spring-boot-starter-web'
+    api 'org.springframework.boot:spring-boot-starter-aop'
+
     api 'org.springframework.cloud:spring-cloud-starter-config'
     api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
     api 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-//    api 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     api 'org.springframework.cloud:spring-cloud-starter-openfeign'
-    api 'org.springframework.boot:spring-boot-starter-validation'
-    api 'org.springframework.boot:spring-boot-starter-aop'
+    api 'org.springframework.kafka:spring-kafka'
+
+    api 'com.querydsl:querydsl-jpa:5.1.0:jakarta'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.1.0:jakarta'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+
     api 'io.github.resilience4j:resilience4j-spring-boot3:2.2.0'
     api 'io.github.resilience4j:resilience4j-circuitbreaker'
     api 'io.github.resilience4j:resilience4j-retry'
-    api 'com.querydsl:querydsl-jpa:5.1.0:jakarta'
+
     api 'org.postgresql:postgresql'
-    api 'org.springframework.boot:spring-boot-starter-data-redis'
 
-    annotationProcessor 'com.querydsl:querydsl-apt:5.1.0:jakarta'
-
-    annotationProcessor 'jakarta.annotation:jakarta.annotation-api:2.1.1'
-    annotationProcessor 'jakarta.persistence:jakarta.persistence-api:3.1.0'
-
-    compileOnly 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    api 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
 
 publishing {
     publications {
@@ -86,8 +98,4 @@ tasks.withType(JavaCompile) {
 
 clean.doLast {
     file(querydslDir).deleteDir()
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
 }
