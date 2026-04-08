@@ -3,6 +3,7 @@ package org.gupang.common;
 import org.gupang.common.config.FeignClientConfig;
 import org.gupang.common.config.JpaConfig;
 import org.gupang.common.config.RedisConfig;
+import org.gupang.common.config.WebConfig;
 import org.gupang.common.exception.GlobalExceptionHandler;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -25,17 +26,22 @@ public class AppContext {
         return new JpaConfig();
     }
 
-
     @Bean
     @ConditionalOnMissingBean(RedisConfig.class)
     public RedisConfig redisConfig() {
-        return new  RedisConfig();
+        return new RedisConfig();
     }
 
     @Bean
     @ConditionalOnMissingBean
     public GlobalExceptionHandler globalExceptionHandler() {
         return new GlobalExceptionHandler();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(WebConfig.class)
+    public WebConfig webConfig() {
+        return new WebConfig();
     }
 
 }
